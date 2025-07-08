@@ -15,10 +15,10 @@ asciinema の録画ファイルを LLM が読みやすい形式に変換する�
 
 ## インストール
 
-### GitHubリリースから（推奨）
+### mise から
 ```bash
-# リリースページからバイナリをダウンロード
-# https://github.com/Mkamono/asciinemaForLLM/releases
+mise use -g go
+mise use -g go:github.com/Mkamono/asciinemaForLLM
 ```
 
 ### go installから
@@ -47,7 +47,7 @@ asciinemaForLLM record my_session --output=csv --cleanup
 # 録画終了（Ctrl+D または exit）
 ```
 
-終了すると `my_session_formatted.csv` ファイルのみが残り、元の .cast ファイルは自動削除されます。
+終了すると `my_session_formatted.csv` ファイルのみが残り、元の .cast ファイルは自動削除されます。(cleanupオプション)
 
 ### その他の使い方
 
@@ -120,19 +120,19 @@ asciinemaForLLM file demo.cast output.md --cleanup
 
 ### コマンド一覧
 
-| コマンド                | 説明                                                                  |
-| ----------------------- | --------------------------------------------------------------------- |
-| `format`                | 標準入力から .cast データを読み取り、構造化テキストまたはCSVを出力     |
-| `record [filename]`     | asciinema 録画を開始し、終了後に自動でフォーマット                    |
-| `file <input> [output]` | 既存の .cast ファイルをフォーマット                                   |
-| `--help`, `-h`          | ヘルプメッセージを表示                                                |
+| コマンド                | 説明                                                               |
+| ----------------------- | ------------------------------------------------------------------ |
+| `format`                | 標準入力から .cast データを読み取り、構造化テキストまたはCSVを出力 |
+| `record [filename]`     | asciinema 録画を開始し、終了後に自動でフォーマット                 |
+| `file <input> [output]` | 既存の .cast ファイルをフォーマット                                |
+| `--help`, `-h`          | ヘルプメッセージを表示                                             |
 
 ### オプション
 
 | オプション        | 説明                                                                 |
 | ----------------- | -------------------------------------------------------------------- |
 | `--cleanup`       | 処理後に元の .cast ファイルを削除（record、file コマンドで使用可能） |
-| `--output=FORMAT` | 出力形式を指定（structured\|csv、デフォルト: structured）             |
+| `--output=FORMAT` | 出力形式を指定（structured\|csv、デフォルト: structured）            |
 
 ## 出力例
 
