@@ -198,10 +198,10 @@ func processFile(inputFile, outputFile, outputFormat string) error {
 
 // ShowUsage displays help information
 func ShowUsage() {
-	fmt.Println(`asciinema-for-llm - asciinema録画ファイルをLLM向けに変換
+	fmt.Println(`asciinemaForLLM - asciinema録画ファイルをLLM向けに変換
 
 使用方法:
-    asciinema-for-llm [コマンド] [オプション]
+    asciinemaForLLM [コマンド] [オプション]
 
 コマンド:
     format              標準入力から.castファイルを読み取り、フォーマット済みテキストを出力
@@ -215,14 +215,14 @@ func ShowUsage() {
 
 使用例:
     # 最も実用的な使い方（推奨）
-    asciinema-for-llm record my_session.cast --output=csv --cleanup
+    asciinemaForLLM record my_session.cast --output=csv --cleanup
 
     # 既存ファイルをCSV変換
-    asciinema-for-llm file demo.cast --output=csv --cleanup
+    asciinemaForLLM file demo.cast --output=csv --cleanup
 
     # 標準入力からフォーマット
-    cat demo.cast | asciinema-for-llm format --output=csv
+    cat demo.cast | asciinemaForLLM format --output=csv
 
     # 構造化テキスト形式（人間向け）
-    asciinema-for-llm record my_session.cast --cleanup`)
+    asciinemaForLLM record my_session.cast --cleanup`)
 }

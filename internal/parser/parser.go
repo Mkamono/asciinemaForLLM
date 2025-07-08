@@ -277,13 +277,23 @@ func cleanFinalOutput(output string) string {
 }
 
 func extractExitCode(data string) int {
-	// Look for fish shell exit status format: status_url=$?
-	statusRegex := regexp.MustCompile(`status_url=(\d+)`)
+	// Look for fish shell exit status format: \u001b]133;D;code\u0007
+	statusRegex := regexp.MustCompile(`\x1b\]133;D;(\d+)\x07`)
 	matches := statusRegex.FindStringSubmatch(data)
 	if len(matches) > 1 {
 		if code, err := strconv.Atoi(matches[1]); err == nil {
 			return code
 		}
 	}
+	
+	// Also look for alternative status_url format (if any shell uses it)
+	statusURLRegex := regexp.MustCompile(`status_url=(\d+)`)
+	matches = statusURLRegex.FindStringSubmatch(data)
+	if len(matches) > 1 {
+		if code, err := strconv.Atoi(matches[1]); err == nil {
+			return code
+		}
+	}
+	
 	return -1 // No exit code found
 }

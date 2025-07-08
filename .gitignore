@@ -18,13 +18,8 @@
 go.work
 
 # Built binary
+asciinemaForLLM
 asciinema-for-llm
-
-# Generated test files
-*_formatted.csv
-*_formatted.md
-session_*.cast
-test_*.cast
 
 # Temporary files
 .DS_Store

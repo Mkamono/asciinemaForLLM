@@ -27,7 +27,7 @@ go install github.com/Mkamono/asciinemaForLLM@latest
 ```bash
 git clone https://github.com/Mkamono/asciinemaForLLM.git
 cd asciinemaForLLM
-go build -o asciinema-for-llm
+go build -o asciinemaForLLM
 ```
 
 ## クイックスタート
@@ -36,7 +36,7 @@ go build -o asciinema-for-llm
 
 ```bash
 # 録画開始 → CSV出力 → 元ファイル削除まで一括処理
-asciinema-for-llm record my_session --output=csv --cleanup
+asciinemaForLLM record my_session --output=csv --cleanup
 
 # ターミナルでコマンドを実行
 # 例: ls, pwd, echo "Hello World"
@@ -52,27 +52,27 @@ asciinema-for-llm record my_session --output=csv --cleanup
 
 ```bash
 # CSV形式で変換 + 元ファイル削除
-asciinema-for-llm file existing_session.cast --output=csv --cleanup
+asciinemaForLLM file existing_session.cast --output=csv --cleanup
 ```
 
 #### 構造化テキスト形式が必要な場合
 
 ```bash
 # 人間が読みやすい形式で出力
-asciinema-for-llm record my_session.cast --cleanup
+asciinemaForLLM record my_session.cast --cleanup
 
 # 既存ファイルを構造化テキストに変換
-asciinema-for-llm file existing_session.cast --cleanup
+asciinemaForLLM file existing_session.cast --cleanup
 ```
 
 #### パイプで使用する場合（従来の方法）
 
 ```bash
 # CSV形式
-cat session.cast | asciinema-for-llm format --output=csv
+cat session.cast | asciinemaForLLM format --output=csv
 
 # 構造化テキスト形式
-cat session.cast | asciinema-for-llm format
+cat session.cast | asciinemaForLLM format
 ```
 
 ## 使い方
@@ -83,36 +83,36 @@ cat session.cast | asciinema-for-llm format
 
 ```bash
 # パイプでファイルを渡す
-cat demo.cast | asciinema-for-llm
+cat demo.cast | asciinemaForLLM
 
 # format サブコマンドを明示的に指定
-cat demo.cast | asciinema-for-llm format
+cat demo.cast | asciinemaForLLM format
 ```
 
 #### 2. 録画から変換まで一括処理
 
 ```bash
 # 録画開始（ファイル名は自動生成）
-asciinema-for-llm record
+asciinemaForLLM record
 
 # ファイル名を指定して録画
-asciinema-for-llm record my_session.cast
+asciinemaForLLM record my_session.cast
 
 # 録画後に元の .cast ファイルを削除
-asciinema-for-llm record my_session.cast --cleanup
+asciinemaForLLM record my_session.cast --cleanup
 ```
 
 #### 3. 既存ファイルの変換
 
 ```bash
 # 既存の .cast ファイルを変換
-asciinema-for-llm file demo.cast
+asciinemaForLLM file demo.cast
 
 # 出力ファイル名を指定
-asciinema-for-llm file demo.cast output.md
+asciinemaForLLM file demo.cast output.md
 
 # 変換後に元ファイルを削除
-asciinema-for-llm file demo.cast output.md --cleanup
+asciinemaForLLM file demo.cast output.md --cleanup
 ```
 
 ### コマンド一覧

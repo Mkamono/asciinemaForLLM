@@ -4,10 +4,12 @@ Recorded: 2025-07-08 14:14:24
 COMMAND: echo "Hello, world"
 START TIME: 3.433s
 DURATION: 2.119s
+EXIT CODE: 0
 OUTPUT: Hello, world
 
 COMMAND: exit
 START TIME: 5.552s
 DURATION: 0.002s
+EXIT CODE: 0
 OUTPUT: (no output)
 

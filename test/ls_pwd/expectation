@@ -4,16 +4,19 @@ Recorded: 2025-07-08 14:15:37
 COMMAND: ls
 START TIME: 1.379s
 DURATION: 1.424s
+EXIT CODE: 0
 OUTPUT: asciinema-for-llm* demo.cast          go.mod             README.md
 CLAUDE.md          expectation.txt    main.go            test/
 
 COMMAND: pwd
 START TIME: 2.802s
 DURATION: 2.467s
+EXIT CODE: 0
 OUTPUT: /Users/kamonomakoto/Documents/repo/asciinemaForLLM
 
 COMMAND: exit
 START TIME: 5.270s
 DURATION: 0.001s
+EXIT CODE: 0
 OUTPUT: (no output)
 
