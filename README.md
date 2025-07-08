@@ -23,7 +23,7 @@ miseでの入れ方を紹介
 
 ```bash
 mise use -g python
-pip install --user pipx
+pip install --user pipx # インストール後、pipxがインストールされたpathが通っているか確認 (~/.local/bin)
 mise use -g pipx:asciinema
 ```
 
