@@ -1,0 +1,16 @@
+Terminal Session (fish shell, 142x39)
+Recorded: 2025-07-08 16:03:45
+Working Directory: /Users/kamonomakoto/Documents/repo/asciinemaForLLM
+
+COMMAND: echo "hellp"
+START TIME: 3.485s
+DURATION: 1.373s
+EXIT CODE: 0
+OUTPUT: (no output)
+
+COMMAND: exit
+START TIME: 4.858s
+DURATION: 0.001s
+EXIT CODE: 0
+OUTPUT: (no output)
+

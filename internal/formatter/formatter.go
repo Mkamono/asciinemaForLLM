@@ -18,6 +18,9 @@ func FormatSessionAsStructured(session *parser.CastSession) {
 		session.Header.Width, 
 		session.Header.Height)
 	fmt.Printf("Recorded: %s\n", time.Unix(session.Header.Timestamp, 0).Format("2006-01-02 15:04:05"))
+	if session.WorkingDir != "" {
+		fmt.Printf("Working Directory: %s\n", session.WorkingDir)
+	}
 	fmt.Printf("\n")
 
 	for _, cmd := range session.Commands {
@@ -40,9 +43,13 @@ func FormatSessionAsCSV(session *parser.CastSession) {
 	width := session.Header.Width
 	height := session.Header.Height
 	recorded := time.Unix(session.Header.Timestamp, 0).Format("2006-01-02 15:04:05")
+	workingDir := session.WorkingDir
+	if workingDir == "" {
+		workingDir = "(unknown)"
+	}
 	
 	// CSV header
-	fmt.Printf("shell,width,height,recorded,command,start_time,duration,exit_code,output\n")
+	fmt.Printf("shell,width,height,recorded,working_dir,command,start_time,duration,exit_code,output\n")
 	
 	// CSV rows
 	for _, cmd := range session.Commands {
@@ -52,11 +59,12 @@ func FormatSessionAsCSV(session *parser.CastSession) {
 		}
 		
 		// Escape CSV fields properly
-		fmt.Printf("%s,%d,%d,%s,%s,%.3f,%.3f,%d,%s\n",
+		fmt.Printf("%s,%d,%d,%s,%s,%s,%.3f,%.3f,%d,%s\n",
 			csvEscape(shell),
 			width,
 			height,
 			csvEscape(recorded),
+			csvEscape(workingDir),
 			csvEscape(cmd.Command),
 			cmd.StartTime,
 			cmd.EndTime-cmd.StartTime,

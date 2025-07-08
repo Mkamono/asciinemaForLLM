@@ -4,11 +4,14 @@ asciinema の録画ファイルを LLM が読みやすい形式に変換する�
 
 ## 機能
 
-- asciinema の .cast ファイルを構造化された Markdown 形式に変換
+- asciinema の .cast ファイルを構造化テキストやCSV形式に変換
 - コマンドの入力と出力を明確に分離
 - 実行時間、開始・終了タイムスタンプの表示
+- **コマンドの終了ステータス（exit code）を取得・表示**
+- **作業ディレクトリ情報を抽出・表示**
 - 端末エスケープシーケンスの自動除去
 - 録画から変換まで一括処理
+- LLM向けに最適化されたCSV出力形式
 
 ## インストール
 
@@ -119,47 +122,44 @@ asciinemaForLLM file demo.cast output.md --cleanup
 
 | コマンド                | 説明                                                                  |
 | ----------------------- | --------------------------------------------------------------------- |
-| `format`                | 標準入力から .cast データを読み取り、フォーマット済み Markdown を出力 |
+| `format`                | 標準入力から .cast データを読み取り、構造化テキストまたはCSVを出力     |
 | `record [filename]`     | asciinema 録画を開始し、終了後に自動でフォーマット                    |
 | `file <input> [output]` | 既存の .cast ファイルをフォーマット                                   |
 | `--help`, `-h`          | ヘルプメッセージを表示                                                |
 
 ### オプション
 
-| オプション  | 説明                                                                 |
-| ----------- | -------------------------------------------------------------------- |
-| `--cleanup` | 処理後に元の .cast ファイルを削除（record、file コマンドで使用可能） |
+| オプション        | 説明                                                                 |
+| ----------------- | -------------------------------------------------------------------- |
+| `--cleanup`       | 処理後に元の .cast ファイルを削除（record、file コマンドで使用可能） |
+| `--output=FORMAT` | 出力形式を指定（structured\|csv、デフォルト: structured）             |
 
 ## 出力例
 
-```markdown
-# Terminal Session Analysis
-Recorded at: 2025-01-01 12:00:00
-Terminal: 80x24
-Shell: /bin/bash
+### 構造化テキスト形式
+```
+Terminal Session (fish shell, 148x35)
+Recorded: 2025-07-08 14:14:24
+Working Directory: /Users/kamonomakoto/Documents/repo/asciinemaForLLM
 
-## Command 1
-**Command:** `ls -la`
-**Start Time:** 1.234s
-**End Time:** 2.567s
-**Duration:** 1.333s
-**Output:**
-```
-total 16
-drwxr-xr-x  4 user user  128 Jan  1 12:00 .
-drwxr-xr-x  3 user user   96 Jan  1 11:59 ..
--rw-r--r--  1 user user 1234 Jan  1 12:00 file.txt
+COMMAND: echo "Hello, world"
+START TIME: 3.433s
+DURATION: 2.119s
+EXIT CODE: 0
+OUTPUT: Hello, world
+
+COMMAND: exit
+START TIME: 5.552s
+DURATION: 0.002s
+EXIT CODE: 0
+OUTPUT: (no output)
 ```
 
-## Command 2
-**Command:** `exit`
-**Start Time:** 5.000s
-**End Time:** 5.001s
-**Duration:** 0.001s
-**Output:**
-```
-(no output)
-```
+### CSV形式（LLM向け）
+```csv
+shell,width,height,recorded,working_dir,command,start_time,duration,exit_code,output
+fish,148,35,2025-07-08 14:14:24,/Users/kamonomakoto/Documents/repo/asciinemaForLLM,"echo ""Hello, world""",3.433,2.119,0,"Hello, world"
+fish,148,35,2025-07-08 14:14:24,/Users/kamonomakoto/Documents/repo/asciinemaForLLM,exit,5.552,0.002,0,(no output)
 ```
 
 ## 開発

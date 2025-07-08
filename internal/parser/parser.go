@@ -31,8 +31,9 @@ type Command struct {
 }
 
 type CastSession struct {
-	Header   CastHeader
-	Commands []Command
+	Header         CastHeader
+	Commands       []Command
+	WorkingDir     string
 }
 
 func ParseCastFile(lines []string) (*CastSession, error) {
@@ -74,10 +75,12 @@ func ParseCastFile(lines []string) (*CastSession, error) {
 	}
 
 	commands := parseCommands(events)
+	workingDir := extractWorkingDirectory(events)
 
 	return &CastSession{
-		Header:   header,
-		Commands: commands,
+		Header:     header,
+		Commands:   commands,
+		WorkingDir: workingDir,
 	}, nil
 }
 
@@ -296,4 +299,21 @@ func extractExitCode(data string) int {
 	}
 	
 	return -1 // No exit code found
+}
+
+func extractWorkingDirectory(events []CastEvent) string {
+	// Look for OSC 7 sequence: \x1b]7;file://hostname/path\x07
+	oscRegex := regexp.MustCompile(`\x1b\]7;file://[^/]*(/.+?)\x07`)
+	
+	for _, event := range events {
+		if event.EventType == "o" {
+			matches := oscRegex.FindStringSubmatch(event.Data)
+			if len(matches) > 1 {
+				// Return the first working directory found
+				return matches[1]
+			}
+		}
+	}
+	
+	return "" // No working directory found
 }
