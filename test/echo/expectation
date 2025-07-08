@@ -1,0 +1,13 @@
+Terminal Session (fish shell, 148x35)
+Recorded: 2025-07-08 14:14:24
+
+COMMAND: echo "Hello, world"
+START TIME: 3.433s
+DURATION: 2.119s
+OUTPUT: Hello, world
+
+COMMAND: exit
+START TIME: 5.552s
+DURATION: 0.002s
+OUTPUT: (no output)
+

@@ -1,0 +1,45 @@
+[tools]
+"pipx:asciinema" = "latest"
+python = "latest"
+
+[tasks.init]
+run = "mise use -g python && pip install --user pipx" # Install pipx globally
+
+[tasks.test]
+run = """
+echo "Running tests for asciinemaForLLM..."
+
+# Find all test directories and run tests
+passed=0
+failed=0
+
+for test_dir in test/*/; do
+    if [ -d "$test_dir" ]; then
+        test_name=$(basename "$test_dir")
+        echo "Testing $test_name case..."
+        
+        if [ -f "$test_dir/demo.cast" ] && [ -f "$test_dir/expectation" ]; then
+            if cat "$test_dir/demo.cast" | go run main.go | diff - "$test_dir/expectation" > /dev/null 2>&1; then
+                echo "✅ $test_name test passed"
+                passed=$((passed + 1))
+            else
+                echo "❌ $test_name test failed"
+                failed=$((failed + 1))
+            fi
+        else
+            echo "⚠️  $test_name: Missing demo.cast or expectation file"
+        fi
+    fi
+done
+
+echo ""
+echo "Test results: $passed passed, $failed failed"
+
+if [ $failed -eq 0 ]; then
+    echo "🎉 All tests passed!"
+    exit 0
+else
+    echo "💥 Some tests failed!"
+    exit 1
+fi
+"""

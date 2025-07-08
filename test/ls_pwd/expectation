@@ -1,0 +1,19 @@
+Terminal Session (fish shell, 148x35)
+Recorded: 2025-07-08 14:15:37
+
+COMMAND: ls
+START TIME: 1.379s
+DURATION: 1.424s
+OUTPUT: asciinema-for-llm* demo.cast          go.mod             README.md
+CLAUDE.md          expectation.txt    main.go            test/
+
+COMMAND: pwd
+START TIME: 2.802s
+DURATION: 2.467s
+OUTPUT: /Users/kamonomakoto/Documents/repo/asciinemaForLLM
+
+COMMAND: exit
+START TIME: 5.270s
+DURATION: 0.001s
+OUTPUT: (no output)
+
