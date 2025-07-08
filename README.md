@@ -13,6 +13,20 @@ asciinema の録画ファイルを LLM が読みやすい形式に変換する�
 - 録画から変換まで一括処理
 - LLM向けに最適化されたCSV出力形式
 
+## 前提
+
+### asciinemaのインストール
+
+https://docs.asciinema.org/getting-started/
+
+miseでの入れ方を紹介
+
+```bash
+mise use -g python
+pip install --user pipx
+mise use -g pipx:asciinema
+```
+
 ## インストール
 
 ### mise から
